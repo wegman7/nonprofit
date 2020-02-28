@@ -3,11 +3,15 @@ import { Route } from 'react-router-dom';
 
 import ProfileList from './containers/ProfileListView';
 import ProfileDetail from './containers/ProfileDetailView';
+import Login from './containers/Login';
+import Signup from './containers/Signup';
 
 const BaseRouter = () => (
     <div>
         <Route exact path='/' component={ProfileList} />
-        <Route exact path='/:profileID' component={ProfileDetail} />
+        <Route exact path='/profiles/:profileID' component={ProfileDetail} />
+        <Route exact path='/login/' component={Login} />
+        <Route exact path='/signup/' component={Signup} />
     </div>
 );
 
