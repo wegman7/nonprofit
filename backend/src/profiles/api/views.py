@@ -1,36 +1,19 @@
 from rest_framework import viewsets
+from django.http import HttpResponse
 
-from profiles.models import Profile
 from .serializers import ProfileSerializer
+from profiles.models import Profile
 
 class ProfileViewSet(viewsets.ModelViewSet):
+
     serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
 
-# from rest_framework.generics import (
-#     ListAPIView, 
-#     RetrieveAPIView,
-#     CreateAPIView,
-#     UpdateAPIView,
-#     DestroyAPIView
-# )
-
-# class ProfileListView(ListAPIView):
-#     queryset = Profile.objects.all()
-#     serializer_class = ProfileSerializer
-
-# class ProfileDetailView(RetrieveAPIView):
-#     queryset = Profile.objects.all()
-#     serializer_class = ProfileSerializer
-
-# class ProfileCreateView(CreateAPIView):
-#     queryset = Profile.objects.all()
-#     serializer_class = ProfileSerializer
-
-# class ProfileUpdateView(UpdateAPIView):
-#     queryset = Profile.objects.all()
-#     serializer_class = ProfileSerializer
-
-# class ProfileDeleteView(DestroyAPIView):
-#     queryset = Profile.objects.all()
-#     serializer_class = ProfileSerializer
+    def get_queryset(self):
+        print(self.request.user.id)
+        queryset = Profile.objects.filter(user=self.request.user)
+        return queryset
+    
+    def update(self, request, pk):
+        # this updates the profile for the logged in user
+        Profile.objects.filter(user=request.user).update(first_name=request.data['first_name'], last_name=request.data['last_name'])
+        return HttpResponse("data!", "status!")

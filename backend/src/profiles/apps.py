@@ -1,5 +1,9 @@
 from django.apps import AppConfig
 
 
-class ArticlesConfig(AppConfig):
-    name = 'articles'
+class ProfilesConfig(AppConfig):
+    name = 'profiles'
+
+    def ready(self):
+        print('ready!')
+        import profiles.signals
