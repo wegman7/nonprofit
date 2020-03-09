@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
+import 'antd/dist/antd.css';
+
 import BaseRouter from './routes';
 import * as actions from './store/actions/auth';
-
-import Navbar from './components/Navbar'
+import CustomNavbar from './components/CustomNavbar'
 
 class App extends Component {
 
@@ -15,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Navbar {...this.props} />
+        <CustomNavbar {...this.props} />
         <BaseRouter />
       </Router>
     );
