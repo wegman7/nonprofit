@@ -7,13 +7,15 @@ from profiles.models import Profile
 class ProfileViewSet(viewsets.ModelViewSet):
 
     serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
 
-    def get_queryset(self):
-        print(self.request.user.id)
-        queryset = Profile.objects.filter(user=self.request.user)
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Profile.objects.filter(user=self.request.user)
+    #     return queryset
     
-    def update(self, request, pk):
-        # this updates the profile for the logged in user
-        Profile.objects.filter(user=request.user).update(first_name=request.data['first_name'], last_name=request.data['last_name'])
-        return HttpResponse("data!", "status!")
+
+    # this is how you manually change put request data
+    # def update(self, request, pk):
+    #     # this updates the profile for the logged in user
+    #     Profile.objects.filter(user=request.user).update(first_name=request.data['first_name'], last_name=request.data['last_name'])
+    #     return HttpResponse("data!", "status!")

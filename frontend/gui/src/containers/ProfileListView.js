@@ -9,15 +9,12 @@ class ProfileList extends React.Component {
         super();
         this.state = this.getInitialState();
         this.getInitialState = this.getInitialState.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.grabFromAPI = this.grabFromAPI.bind(this);
     }
 
     getInitialState() {
         return {
-            profiles: [],
-            added_first_name: '',
-            added_last_name: ''
+            profiles: []
         }
     }
 
@@ -33,6 +30,18 @@ class ProfileList extends React.Component {
                         'profiles': response.data
                     })
                 })
+            axios.get('http://127.0.0.1:8000/rest-auth/user/', {
+                headers: {
+                    Authorization: `Token ${this.props.token.token}`
+                }
+            })
+        } else {
+            axios.get('http://127.0.0.1:8000/api/')
+                .then(response => {
+                    this.setState({
+                        'profiles': response.data
+                    })
+                })
         }
     }
     
@@ -43,20 +52,10 @@ class ProfileList extends React.Component {
     componentDidUpdate() {
         // library that will let us compare entire objects
         let _ = require('lodash');
-        // if user is logged out, we need to reset state back to initial (blank), if it isn't already blank
-        if (!this.props.isAuthenticated && !_.isEqual(this.state, this.getInitialState())) {
-            this.setState(this.getInitialState());
-        }
         // this is so that profiles are reloaded when page is reloaded. we NEED _.isEqual so that this won't trigger an infinite loop
         if (this.props.token && _.isEqual(this.state, this.getInitialState())) {
             this.grabFromAPI();
         }
-    }
-
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
     }
 
     render() {
@@ -76,4 +75,3 @@ const mapStateToProps = state => {
   }
   
   export default connect(mapStateToProps)(ProfileList);
-  
