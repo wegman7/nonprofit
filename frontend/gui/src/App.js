@@ -5,7 +5,8 @@ import 'antd/dist/antd.css';
 
 import BaseRouter from './routes';
 import * as actions from './store/actions/auth';
-import CustomNavbar from './components/CustomNavbar'
+import CustomLayout from './containers/CustomLayout';
+import './App.css';
 
 class App extends Component {
 
@@ -15,10 +16,13 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <CustomNavbar {...this.props} />
-        <BaseRouter />
-      </Router>
+      <div>
+        <Router>
+          <CustomLayout {...this.props}>
+            <BaseRouter />
+          </CustomLayout>
+        </Router>
+      </div>
     );
   }
 }

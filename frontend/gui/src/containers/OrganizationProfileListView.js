@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import Profiles from '../components/Profiles';
+import OrganizationProfiles from '../components/OrganizationProfiles';
 
-class ProfileList extends React.Component {
+class OrganizationProfileList extends React.Component {
     constructor() {
         super();
         this.state = this.getInitialState();
@@ -14,7 +14,9 @@ class ProfileList extends React.Component {
 
     getInitialState() {
         return {
-            profiles: []
+            profiles: [],
+            organization_profiles: [],
+            helper_profiles: []
         }
     }
 
@@ -27,7 +29,9 @@ class ProfileList extends React.Component {
             })
                 .then(response => {
                     this.setState({
-                        'profiles': response.data
+                        'profiles': response.data,
+                        'organization_profiles': response.data.filter(item => item.is_organization),
+                        'helper_profiles': response.data.filter(item => !item.is_organization)
                     })
                 })
             axios.get('http://127.0.0.1:8000/rest-auth/user/', {
@@ -39,7 +43,9 @@ class ProfileList extends React.Component {
             axios.get('http://127.0.0.1:8000/api/')
                 .then(response => {
                     this.setState({
-                        'profiles': response.data
+                        'profiles': response.data,
+                        'organization_profiles': response.data.filter(item => item.is_organization),
+                        'helper_profiles': response.data.filter(item => !item.is_organization)
                     })
                 })
         }
@@ -53,15 +59,21 @@ class ProfileList extends React.Component {
         // library that will let us compare entire objects
         let _ = require('lodash');
         // this is so that profiles are reloaded when page is reloaded. we NEED _.isEqual so that this won't trigger an infinite loop
-        if (this.props.token && _.isEqual(this.state, this.getInitialState())) {
+
+        // i'm not sure if i need this.props.token
+        // if (this.props.token && _.isEqual(this.state, this.getInitialState())) {
+        if (_.isEqual(this.state, this.getInitialState())) {
             this.grabFromAPI();
         }
     }
 
     render() {
+    
         return(
             <div>
-                <Profiles profiles={this.state.profiles} />
+                {/* <Profiles profiles={this.state.organization_profiles} title="Organizations" />
+                <Profiles profiles={this.state.helper_profiles} title="Helpers" /> */}
+                <OrganizationProfiles profiles={this.state.organization_profiles} />
             </div>
         )
     }
@@ -74,4 +86,4 @@ const mapStateToProps = state => {
     }
   }
   
-  export default connect(mapStateToProps)(ProfileList);
+  export default connect(mapStateToProps)(OrganizationProfileList);

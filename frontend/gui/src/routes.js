@@ -2,16 +2,20 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 // import Home from './containers/Home';
-import ProfileList from './containers/ProfileListView';
-import ProfileDetail from './containers/ProfileDetailView';
+import OrganizationProfileList from './containers/OrganizationProfileListView';
+import HelperProfileList from './containers/HelperProfileListView';
+import OrganizationProfileDetail from './containers/OrganizationProfileDetailView';
+import HelperProfileDetail from './containers/HelperProfileDetailView';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 
 const BaseRouter = () => (
     <div>
         {/* <Route exact path='/' component={Home} /> */}
-        <Route exact path='/' component={ProfileList} />
-        <Route exact path='/profiles/:profileID' component={ProfileDetail} />
+        <Route exact path='/' component={OrganizationProfileList} />
+        <Route exact path='/contributors/' component={HelperProfileList} />
+        <Route exact path='/profiles/:profileID' component={OrganizationProfileDetail} />
+        <Route exact path='/contributors/profiles/:profileID' component={HelperProfileDetail} />
         <Route exact path='/login/' component={Login} />
         <Route exact path='/signup/' component={Signup} />
     </div>

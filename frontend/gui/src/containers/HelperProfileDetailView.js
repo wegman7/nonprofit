@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import UpdateProfile from '../components/UpdateProfile';
 
-class ProfileDetail extends React.Component {
+class HelperProfileDetail extends React.Component {
     constructor() {
         super();
         this.state = this.getInitialState();
@@ -150,4 +150,4 @@ const mapStateToProps = state => {
     }
   }
   
-export default connect(mapStateToProps)(ProfileDetail);
+export default connect(mapStateToProps)(HelperProfileDetail);

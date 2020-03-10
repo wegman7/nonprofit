@@ -8,42 +8,25 @@ import * as actions from '../store/actions/auth';
 class CustomNavbar extends Component {
 
     render() {
-        // return (
-        //     <nav>
-        //         <Link to="/">Home</Link>
-        //         {
-        //             this.props.isAuthenticated ?
-
-        //             <button onClick={this.props.logout}>Logout</button>
-
-        //             :
-                    
-        //             <Link to="/login/">Login</Link>
-                    
-        //         }
-        //     </nav>
-        // )
         return (
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="dark" variant="dark" fixed="top" expand="lg">
                 <Nav>
-                    <Nav.Link><Link to="/" className="nav-item nav-link">Home</Link></Nav.Link>
+                    <Link to="/" className="nav-item nav-link">Home</Link>
                 </Nav>
                 <div className="navbar-nav mr-auto"></div>
                 <div className="navbar-nav">
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>
-                            <Nav.Link>
-                                {
-                                    this.props.isAuthenticated ?
+                            {
+                                this.props.isAuthenticated ?
 
-                                    <button  className="nav-item nav-link btn btn-link" onClick={this.props.logout}>Logout</button>
+                                <button  className="nav-item nav-link btn btn-link" onClick={this.props.logout}>Logout</button>
 
-                                    :
+                                :
 
-                                    <Link to="/login/" className="nav-item nav-link">Login</Link>
-                                }
-                            </Nav.Link>
+                                <Link to="/login/" className="nav-item nav-link">Login</Link>
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </div>
