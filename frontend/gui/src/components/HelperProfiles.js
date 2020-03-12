@@ -45,12 +45,13 @@ function HelperProfiles(props) {
                     />
                     }
                 >
-                    <List.Item.Meta
+                <span className="d-flex flex-row-reverse">{item.city}, {item.state}</span>
+                <List.Item.Meta
                     avatar={<Avatar src={item.avatar} />}
-                    title={<Link to={`profiles/${item.id}`}>{item.username}</Link>}
-                    description={item.description}
-                    />
-                    {item.username}
+                    title={<Link to={`profiles/${item.id}`}>{item.first_name} {item.last_name}</Link>}
+                    description={`Expert in ${item.area_of_expertise}`}
+                />
+                Interested in {item.cause_of_interest}
                 </List.Item>
                 )}
             />

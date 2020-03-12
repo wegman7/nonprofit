@@ -29,7 +29,9 @@ class HelperProfileList extends React.Component {
             })
                 .then(response => {
                     this.setState({
-                        'profiles': response.data
+                        'profiles': response.data,
+                        'organization_profiles': response.data.filter(item => item.is_organization),
+                        'helper_profiles': response.data.filter(item => !item.is_organization)
                     })
                 })
             axios.get('http://127.0.0.1:8000/rest-auth/user/', {
@@ -57,7 +59,7 @@ class HelperProfileList extends React.Component {
         // library that will let us compare entire objects
         let _ = require('lodash');
         // this is so that profiles are reloaded when page is reloaded. we NEED _.isEqual so that this won't trigger an infinite loop
-        if (this.props.token && _.isEqual(this.state, this.getInitialState())) {
+        if (_.isEqual(this.state, this.getInitialState())) {
             this.grabFromAPI();
         }
     }

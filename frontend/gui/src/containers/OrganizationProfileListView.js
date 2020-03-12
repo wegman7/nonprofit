@@ -58,10 +58,8 @@ class OrganizationProfileList extends React.Component {
     componentDidUpdate() {
         // library that will let us compare entire objects
         let _ = require('lodash');
-        // this is so that profiles are reloaded when page is reloaded. we NEED _.isEqual so that this won't trigger an infinite loop
 
-        // i'm not sure if i need this.props.token
-        // if (this.props.token && _.isEqual(this.state, this.getInitialState())) {
+        // this is so that profiles are reloaded when page is reloaded. we NEED _.isEqual so that this won't trigger an infinite loop
         if (_.isEqual(this.state, this.getInitialState())) {
             this.grabFromAPI();
         }
@@ -71,8 +69,6 @@ class OrganizationProfileList extends React.Component {
     
         return(
             <div>
-                {/* <Profiles profiles={this.state.organization_profiles} title="Organizations" />
-                <Profiles profiles={this.state.helper_profiles} title="Helpers" /> */}
                 <OrganizationProfiles profiles={this.state.organization_profiles} />
             </div>
         )

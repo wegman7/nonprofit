@@ -9,27 +9,26 @@ class CustomNavbar extends Component {
 
     render() {
         return (
-            <Navbar bg="dark" variant="dark" fixed="top" expand="lg">
-                <Nav>
-                    <Link to="/" className="nav-item nav-link">Home</Link>
-                </Nav>
-                <div className="navbar-nav mr-auto"></div>
-                <div className="navbar-nav">
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav>
-                            {
-                                this.props.isAuthenticated ?
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+                <Navbar.Brand><Link to="/" className="nav-item nav-link">Home</Link></Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Link to="/" className="nav-item nav-link align-self-sm-end">Organizations</Link>
+                        <Link to="/contributors/" className="nav-item nav-link align-self-sm-end">Contributors</Link>
+                    </Nav>
+                    <Nav>
+                        {
+                            this.props.isAuthenticated ?
 
-                                <button  className="nav-item nav-link btn btn-link" onClick={this.props.logout}>Logout</button>
+                            <button className="nav-item nav-link btn btn-link align-self-sm-end" onClick={this.props.logout}>Logout</button>
 
-                                :
+                            :
 
-                                <Link to="/login/" className="nav-item nav-link">Login</Link>
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </div>
+                            <Link to="/login/" className="nav-item nav-link align-self-sm-end">Login</Link>
+                        }
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         )
     }

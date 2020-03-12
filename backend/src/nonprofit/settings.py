@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'corsheaders',
     'django.contrib.sites',
     'rest_auth',

@@ -37,20 +37,21 @@ function OrganizationProfiles(props) {
                     <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
                     <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
                     ]}
-                    extra={
-                    <img
-                        width={272}
-                        alt="logo"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                    />
-                    }
+                    // extra={
+                    // <img
+                    //     width={272}
+                    //     alt="logo"
+                    //     src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                    // />
+                    // }
                 >
-                    <List.Item.Meta
+                <span className="d-flex flex-row-reverse">{item.city}, {item.state}</span>
+                <List.Item.Meta
                     avatar={<Avatar src={item.avatar} />}
-                    title={<Link to={`profiles/${item.id}`}>{item.username}</Link>}
-                    description={item.description}
-                    />
-                    {item.username}
+                    title={<Link to={`profiles/${item.id}`}>{item.organization_name}</Link>}
+                    description={`Seeking ${item.type_of_help_needed}`}
+                />
+                {item.organization_info}
                 </List.Item>
                 )}
             />
